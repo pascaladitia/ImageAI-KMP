@@ -33,6 +33,7 @@ class HomeScreen() : Screen {
             }
             is UiState.Success -> {
                 val data = (uiState as UiState.Success).data
+                ErrorScreen(message = data.toString()) {}
             }
         }
     }

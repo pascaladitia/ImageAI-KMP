@@ -156,7 +156,7 @@ buildkonfig {
     // https://github.com/yshrsmz/BuildKonfig#gradle-configuration
     packageName = "com.pascal.imageai"
     defaultConfigs {
-        buildConfigField(FieldSpec.Type.STRING, "BASE_URL", "https://modelslab.com/api/v3")
+        buildConfigField(FieldSpec.Type.STRING, "BASE_URL", "https://api.edenai.run/v2")
     }
 }
 

@@ -1,7 +1,7 @@
 package com.pascal.imageai.data.remote
 
 import com.pascal.imageai.BuildKonfig
-import com.pascal.imageai.domain.model.TextToImage
+import com.pascal.imageai.domain.model.ImageResponse
 import com.pascal.imageai.utils.Constant.API_KEY
 import com.pascal.imageai.utils.Constant.TIMEOUT
 import io.ktor.client.HttpClient
@@ -19,8 +19,6 @@ import io.ktor.client.request.setBody
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.buildJsonObject
-import kotlinx.serialization.json.put
 import org.koin.core.annotation.Single
 
 @Single
@@ -49,7 +47,8 @@ object KtorClientApi {
         }
 
         defaultRequest {
-            header("Content-Type", "application/json")
+            header("content-type", "application/json")
+            header("authorization", "Bearer $API_KEY")
         }
 
         install(HttpTimeout) {
@@ -59,29 +58,20 @@ object KtorClientApi {
         }
     }
 
-    @OptIn(ExperimentalSerializationApi::class)
-    suspend fun textToImage(text: String): TextToImage {
-        val body = buildJsonObject {
-            put("key", API_KEY)
-            put("prompt", text)
-            put(
-                "negative_prompt",
-                "((out of frame)), ((extra fingers)), mutated hands, ((poorly drawn hands)), ((poorly drawn face)), (((mutation))), (((deformed))), (((tiling))), ((naked)), ((tile)), ((fleshpile)), ((ugly)), (((abstract))), blurry, ((bad anatomy)), ((bad proportions)), ((extra limbs)), cloned face, (((skinny))), glitchy, ((extra breasts)), ((double torso)), ((extra arms)), ((extra hands)), ((mangled fingers)), ((missing breasts)), (missing lips), ((ugly face)), ((fat)), ((extra legs))"
-            )
-            put("width", "512")
-            put("height", "512")
-            put("samples", "1")
-            put("num_inference_steps", "20")
-            put("safety_checker", "no")
-            put("enhance_prompt", "yes")
-            put("temp", "yes")
-            put("seed", null)
-            put("guidance_scale", 7.5)
-            put("webhook", null)
-            put("track_id", null)
-        }
+    suspend fun textToImage(text: String): ImageResponse {
+        val body = """
+            {
+                "response_as_dict":true,
+                "attributes_as_list":false,
+                "show_original_response":false,
+                "num_images":2,
+                "providers":"deepai,stabilityai,openai,replicate,amazon",
+                "text":"$text",
+                "resolution":"512x512"
+            }
+        """.trimIndent()
 
-        return client.post("${BuildKonfig.BASE_URL}/text2img") {
+        return client.post("${BuildKonfig.BASE_URL}/image/generation") {
             setBody(body)
         }.body()
     }

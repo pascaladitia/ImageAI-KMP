@@ -4,7 +4,7 @@ import com.pascal.imageai.createSettings
 import com.russhwolf.settings.Settings
 import com.russhwolf.settings.get
 import com.russhwolf.settings.set
-import com.pascal.imageai.domain.model.TextToImage
+import com.pascal.imageai.domain.model.ImageResponse
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
@@ -17,7 +17,7 @@ object PrefLogin {
     private const val IMAGE_URL = "image_url"
     private const val RESPONSE_LOGIN = "response_login"
 
-    private fun Settings.setLoginResponse(value: TextToImage?) {
+    private fun Settings.setLoginResponse(value: ImageResponse?) {
         if (value != null) {
             val jsonString = Json.encodeToString(value)
             putString(RESPONSE_LOGIN, jsonString)
@@ -26,16 +26,16 @@ object PrefLogin {
         }
     }
 
-    private fun Settings.getLoginResponse(): TextToImage? {
+    private fun Settings.getLoginResponse(): ImageResponse? {
         val jsonString = getString(RESPONSE_LOGIN, "")
         return jsonString.let { Json.decodeFromString(it) }
     }
 
-    fun setLoginResponse(value: TextToImage?) {
+    fun setLoginResponse(value: ImageResponse?) {
         createSettings().setLoginResponse(value)
     }
 
-    fun getLoginResponse(): TextToImage? {
+    fun getLoginResponse(): ImageResponse? {
         return createSettings().getLoginResponse()
     }
 

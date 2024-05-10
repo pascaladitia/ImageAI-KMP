@@ -1,7 +1,7 @@
 package com.pascal.imageai.presentation.screen.home
 
 import com.pascal.imageai.data.repository.Repository
-import com.pascal.imageai.domain.model.TextToImage
+import com.pascal.imageai.domain.model.ImageResponse
 import com.pascal.imageai.domain.usecases.UiState
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,8 +15,8 @@ class HomeViewModel(
     private val repository: Repository
 ) : ViewModel() {
 
-    private val _result = MutableStateFlow<UiState<TextToImage>>(UiState.Empty)
-    val result: StateFlow<UiState<TextToImage>> = _result.asStateFlow()
+    private val _result = MutableStateFlow<UiState<ImageResponse>>(UiState.Empty)
+    val result: StateFlow<UiState<ImageResponse>> = _result.asStateFlow()
 
     fun textToImage(text: String) {
         viewModelScope.launch {
