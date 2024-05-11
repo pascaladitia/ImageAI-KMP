@@ -9,7 +9,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import imageai_kmp.composeapp.generated.resources.Res
+import imageai_kmp.composeapp.generated.resources.logo
 import imageai_kmp.composeapp.generated.resources.no_profile
+import imageai_kmp.composeapp.generated.resources.no_thumbnail
 import io.kamel.core.Resource
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
@@ -37,7 +39,7 @@ fun NetworkImage(
             Image(
                 modifier = Modifier
                     .fillMaxSize(),
-                painter = painterResource(Res.drawable.no_profile),
+                painter = painterResource(Res.drawable.logo),
                 contentDescription = null,
                 alignment = Alignment.CenterEnd
             )

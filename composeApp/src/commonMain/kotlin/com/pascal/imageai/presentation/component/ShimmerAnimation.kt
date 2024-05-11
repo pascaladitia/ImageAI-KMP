@@ -54,16 +54,14 @@ fun ShimmerAnimation() {
 @Composable
 fun ShimmerItem(modifier: Modifier = Modifier, brush: Brush) {
     Column(modifier = modifier.padding(vertical = 32.dp, horizontal = 24.dp)) {
-        for (i in 1..6) {
-            Spacer(
-                modifier = Modifier
-                    .padding(vertical = 8.dp)
-                    .fillMaxWidth()
-                    .height(60.dp)
-                    .clip(RoundedCornerShape(8.dp))
-                    .background(brush = brush)
-            )
-        }
+        Spacer(
+            modifier = Modifier
+                .padding(vertical = 8.dp)
+                .fillMaxWidth()
+                .height(60.dp)
+                .clip(RoundedCornerShape(8.dp))
+                .background(brush = brush)
+        )
     }
 }
 

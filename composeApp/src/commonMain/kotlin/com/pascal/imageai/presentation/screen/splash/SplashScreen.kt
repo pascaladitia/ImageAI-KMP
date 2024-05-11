@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import com.pascal.imageai.presentation.screen.bottom.BottomScreen
+import com.pascal.imageai.presentation.screen.home.HomeScreen
 import imageai_kmp.composeapp.generated.resources.Res
 import imageai_kmp.composeapp.generated.resources.logo
 import kotlinx.coroutines.delay
@@ -36,7 +37,7 @@ fun SplashContent(
 
     LaunchedEffect(Unit) {
         delay(1500)
-        navigator?.replace(BottomScreen())
+        navigator?.replace(HomeScreen())
     }
 
     Box(

@@ -14,8 +14,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.KeyboardArrowDown
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -30,11 +28,9 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import com.pascal.imageai.theme.AppTheme
 import compose.icons.FeatherIcons
 import compose.icons.feathericons.Eye
 import compose.icons.feathericons.EyeOff
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun FormBasicComponent(
@@ -278,67 +274,6 @@ fun FormPasswordComponent(
                     }
                 }
             }
-        )
-    }
-}
-
-@Preview
-@Composable
-fun FormBasicPreview() {
-    AppTheme {
-        FormBasicComponent(
-            title = "Name",
-            hintText = "Masukan nama",
-            value = "test",
-            onValueChange = {},
-            onError = false,
-        )
-    }
-}
-
-@Preview
-@Composable
-fun FormClickedPreview() {
-    AppTheme {
-        FormClickedComponent(
-            title = "click",
-            icons = Icons.Outlined.KeyboardArrowDown,
-            hintText = "",
-            value = "",
-            onValueChange = {},
-            onError = false,
-            enabled = false,
-            onIconClick = {}
-        )
-    }
-}
-
-@Preview
-@Composable
-fun FormEmailPreview() {
-    AppTheme {
-        FormEmailComponent(
-            title = "Email",
-            hintText = "Masukan alamat email",
-            value = "test",
-            onValueChange = {},
-            onError = false,
-        )
-    }
-}
-
-@Preview
-@Composable
-fun FormPasswordPreview() {
-    AppTheme {
-        FormPasswordComponent(
-            title = "Password",
-            hintText = "",
-            value = "",
-            onValueChange = {},
-            isPasswordVisible = false,
-            onError = false,
-            onIconClick = {}
         )
     }
 }

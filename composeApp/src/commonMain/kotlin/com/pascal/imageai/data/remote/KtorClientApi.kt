@@ -65,7 +65,7 @@ object KtorClientApi {
                 "attributes_as_list":false,
                 "show_original_response":false,
                 "num_images":2,
-                "providers":"deepai,stabilityai,openai,replicate,amazon",
+                "providers":"deepai",
                 "text":"$text",
                 "resolution":"512x512"
             }

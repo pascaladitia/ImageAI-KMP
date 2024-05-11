@@ -1,30 +1,31 @@
 package com.pascal.imageai.presentation.component
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import compose.icons.FeatherIcons
-import compose.icons.feathericons.Search
 
 @Composable
 fun Search(
@@ -34,16 +35,31 @@ fun Search(
 
     var searchText by remember { mutableStateOf("") }
 
-    BasicTextField(
+    OutlinedTextField(
         modifier = modifier
-            .clip(RoundedCornerShape(12.dp))
-            .background(MaterialTheme.colorScheme.secondary, RoundedCornerShape(12.dp)),
+            .fillMaxWidth()
+            .heightIn(min = 16.dp)
+            .background(MaterialTheme.colorScheme.background, RoundedCornerShape(48.dp)),
+        shape = RoundedCornerShape(22.dp),
         value = searchText,
         onValueChange = {
             searchText = it
+            onSearch(it)
         },
-        textStyle = MaterialTheme.typography.bodySmall,
-        singleLine = true,
+        textStyle = MaterialTheme.typography.bodyLarge,
+        placeholder = {
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(Icons.Default.Search, contentDescription = null)
+                Text(
+                    text = "Prompt here...",
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 1,
+                    modifier = Modifier.padding(start = 8.dp)
+                )
+            }
+        },
         keyboardOptions = KeyboardOptions.Default.copy(
             imeAction = ImeAction.Search,
             keyboardType = KeyboardType.Text
@@ -52,30 +68,6 @@ fun Search(
             onSearch = {
                 onSearch(searchText)
             }
-        ),
-        decorationBox = { innerTextField ->
-            Row(
-                modifier = Modifier
-                    .padding(horizontal = 16.dp, vertical = 12.dp),
-            ) {
-                Icon(
-                    imageVector = FeatherIcons.Search,
-                    contentDescription = "Arrow Down",
-                    tint = MaterialTheme.colorScheme.tertiary
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Box {
-                    if (searchText.isEmpty()) {
-                        Text(
-                            text = "Search...",
-                            style = MaterialTheme.typography.bodySmall.copy(
-                                color = MaterialTheme.colorScheme.tertiary
-                            )
-                        )
-                    }
-                    innerTextField()
-                }
-            }
-        }
+        )
     )
 }
